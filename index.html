@@ -24,36 +24,18 @@
       }
 
       @keyframes gradientMove {
-        0% {
-          background-position: left;
-        }
-        50% {
-          background-position: right;
-        }
-        100% {
-          background-position: left;
-        }
+        0%   { background-position: left; }
+        50%  { background-position: right; }
+        100% { background-position: left; }
       }
 
       @keyframes colorCycle {
-        0% {
-          background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4);
-        }
-        20% {
-          background-image: linear-gradient(135deg, #ff6b6b, #ffb3b3, #ffd6cc);
-        }
-        40% {
-          background-image: linear-gradient(135deg, #8de3a0, #c9f7d3, #eafff0);
-        }
-        60% {
-          background-image: linear-gradient(135deg, #ffe066, #fff3b0, #fffaf0);
-        }
-        80% {
-          background-image: linear-gradient(135deg, #ffffff, #fef6f9, #ffe9f0);
-        }
-        100% {
-          background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4);
-        }
+        0%   { background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4); }
+        20%  { background-image: linear-gradient(135deg, #ff6b6b, #ffb3b3, #ffd6cc); }
+        40%  { background-image: linear-gradient(135deg, #8de3a0, #c9f7d3, #eafff0); }
+        60%  { background-image: linear-gradient(135deg, #ffe066, #fff3b0, #fffaf0); }
+        80%  { background-image: linear-gradient(135deg, #ffffff, #fef6f9, #ffe9f0); }
+        100% { background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4); }
       }
 
       .floating {
@@ -66,14 +48,9 @@
       }
 
       @keyframes floatUp {
-        from {
-          transform: translateY(0) rotate(0deg);
-        }
-        to {
-          transform: translateY(-120vh) rotate(360deg);
-        }
+        from { transform: translateY(0) rotate(0deg); }
+        to   { transform: translateY(-120vh) rotate(360deg); }
       }
-
 
       .sparkle {
         position: absolute;
@@ -85,120 +62,142 @@
       }
 
       @keyframes twinkle {
-        from {
-          opacity: 0.3;
-          transform: scale(1);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1.4);
-        }
+        from { opacity: 0.3; transform: scale(1); }
+        to   { opacity: 1;   transform: scale(1.4); }
       }
 
+      #landing {
+        position: fixed; inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        z-index: 20;
+      }
+
+      #landing.hide {
+        opacity: 0;
+        transform: scale(1.05);
+        pointer-events: none;
+      }
+
+      .present-wrap {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: bobble 3s ease-in-out infinite;
+        user-select: none;
+      }
+
+      .present-wrap:hover { animation: none; transform: scale(1.08); }
+      .present-wrap:active { transform: scale(0.95); }
+
+      @keyframes bobble {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(-12px); }
+      }
+
+      .present-svg { width: 180px; height: 180px; }
+
+      .lid {
+        transform-origin: 80px 68px;
+        transition: transform 0.25s cubic-bezier(0.34, 1.8, 0.64, 1);
+      }
+
+      .present-wrap:hover .lid {
+        transform: translateY(-22px) rotate(-12deg);
+      }
+
+      .sparkle-burst {
+        position: fixed;
+        font-size: 20px;
+        pointer-events: none;
+        animation: burst 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      @keyframes burst {
+        0%   { transform: translate(0,0) scale(0); opacity: 1; }
+        100% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0; }
+      }
+
+      #cardPage {
+        display: none;
+        width: 100%;
+        min-height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      #cardPage.show { display: flex; }
 
       .card {
-        animation: fadeIn 1.5s ease;
+        animation: cardEntrance 0.7s cubic-bezier(0.22, 1.4, 0.36, 1) both;
         backdrop-filter: blur(14px);
         background: rgba(255, 255, 255, 0.3);
         box-shadow: 0 8px 35px rgba(255, 105, 180, 0.25);
       }
 
-      @keyframes fadeIn {
-        from {
-          transform: translateY(20px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+      @keyframes cardEntrance {
+        0%   { transform: translateY(60px) scale(0.92); opacity: 0; }
+        60%  { opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
       }
 
-      .card-float {
-        animation: cardFloat 4s ease-in-out infinite;
+      @keyframes fadeIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to   { transform: translateY(0);    opacity: 1; }
       }
+
+      .card-float { animation: cardFloat 4s ease-in-out infinite; }
 
       @keyframes cardFloat {
-        0% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-8px);
-        }
-        100% {
-          transform: translateY(0px);
-        }
+        0%   { transform: translateY(0px); }
+        50%  { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
       }
-
-
-      .glow {
-        animation: glow 2s infinite alternate;
-      }
-
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 10px #ff4da6;
-        }
-        to {
-          text-shadow: 0 0 25px #ff1493;
-        }
-      }
-
 
       .text-shadow {
-        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4),
-          0 0 20px rgba(255, 105, 180, 0.3);
+        text-shadow: 0 2px 10px rgba(255,255,255,0.4), 0 0 20px rgba(255,105,180,0.3);
       }
 
-
-      .soft-pulse {
-        animation: softPulse 2s infinite;
-      }
+      .soft-pulse { animation: softPulse 2s infinite; }
 
       @keyframes softPulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.04);
-        }
-        100% {
-          transform: scale(1);
-        }
+        0%   { transform: scale(1); }
+        50%  { transform: scale(1.04); }
+        100% { transform: scale(1); }
       }
-
 
       .cute-btn {
         position: relative;
         overflow: hidden;
-        box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        box-shadow: 0 0 20px rgba(255,105,180,0.5);
       }
 
-      .cute-btn:hover {
-        box-shadow: 0 0 35px rgba(255, 105, 180, 0.8);
-      }
+      .cute-btn:hover { box-shadow: 0 0 35px rgba(255,105,180,0.8); }
 
       .cute-btn::before {
         content: "";
         position: absolute;
-        top: -120%;
-        left: -40%;
-        width: 50%;
-        height: 300%;
-        background: rgba(255, 255, 255, 0.4);
+        top: -120%; left: -40%;
+        width: 50%; height: 300%;
+        background: rgba(255,255,255,0.4);
         transform: rotate(25deg);
         animation: shine 3s infinite;
       }
 
       @keyframes shine {
-        0% {
-          left: -60%;
-        }
-        100% {
-          left: 130%;
-        }
+        0%   { left: -60%; }
+        100% { left: 130%; }
       }
-
 
       .blur-heart {
         position: absolute;
@@ -210,178 +209,123 @@
         pointer-events: none;
       }
 
-      .heart1 {
-        top: 10%;
-        left: 8%;
-      }
-
-      .heart2 {
-        bottom: 12%;
-        right: 10%;
-        animation-delay: 2s;
-      }
-
-      .heart3 {
-        top: 50%;
-        right: 15%;
-        animation-delay: 4s;
-      }
-
-      .heart4 {
-        bottom: 5%;
-        right: 3%;
-        animation-delay: 4s;
-      }
-      .heart5 {
-        bottom: 6%;
-        left: 3%;
-        animation-delay: 1.5s;
-      }
-
-      .heart6 {
-        bottom: 25%;
-        left: 18%;
-        animation-delay: 3s;
-      }
+      .heart1 { top: 10%;    left: 8%;  }
+      .heart2 { bottom: 12%; right: 10%; animation-delay: 2s; }
+      .heart3 { top: 50%;    right: 15%; animation-delay: 4s; }
+      .heart4 { bottom: 5%;  right: 3%;  animation-delay: 4s; }
+      .heart5 { bottom: 6%;  left: 3%;   animation-delay: 1.5s; }
+      .heart6 { bottom: 25%; left: 18%;  animation-delay: 3s; }
 
       @keyframes floatHeart {
-        0% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-15px);
-        }
-        100% {
-          transform: translateY(0px);
-        }
+        0%   { transform: translateY(0px); }
+        50%  { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
       }
 
       @media (max-width: 640px) {
-        .blur-heart {
-          font-size: 60px;
-        }
-        .card {
-          padding: 1.5rem !important;
-        }
+        .blur-heart { font-size: 60px; }
+        .card { padding: 1.5rem !important; }
       }
 
       .countdown-banner {
         position: relative;
         z-index: 10;
         margin-bottom: 12px;
-        padding: 8px 20px;
+        padding: 8px 24px;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.35);
+        background: rgba(255,255,255,0.45);
         backdrop-filter: blur(8px);
         color: #831843;
         font-weight: 700;
         text-align: center;
         font-size: 14px;
+        overflow: hidden;
+        animation: bannerPop 0.6s cubic-bezier(0.22, 1.4, 0.36, 1) both;
+        animation-delay: 0.5s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+
+      .countdown-banner::after {
+        content: "";
+        position: absolute;
+        top: 0; left: -75%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        animation: bannerShimmer 3s ease-in-out infinite;
+        animation-delay: 1.2s;
+      }
+
+      @keyframes bannerPop {
+        0%   { opacity: 0; transform: scale(0.85) translateY(-6px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+      }
+
+      @keyframes bannerShimmer {
+        0%   { left: -75%; }
+        100% { left: 125%; }
       }
 
       @media (min-width: 640px) {
-        .countdown-banner {
-          font-size: 16px;
-        }
+        .countdown-banner { font-size: 16px; }
       }
     </style>
   </head>
 
-  <body class="min-h-screen flex flex-col items-center justify-center px-4 relative">
+  <body class="min-h-screen relative">
 
-    <div id="countdownBanner" class="countdown-banner"></div>
-
-    <script>
-      for (let i = 0; i < 25; i++) {
-        const heart = document.createElement("div");
-
-        heart.innerHTML = ["🎈", "✨", "🎂", "🎉"][
-          Math.floor(Math.random() * 4)
-        ];
-
-        heart.className = "floating text-2xl";
-
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 5 + Math.random() * 7 + "s";
-        heart.style.fontSize = 20 + Math.random() * 25 + "px";
-
-        document.body.appendChild(heart);
-      }
-    </script>
-
-
-    <script>
-      for (let i = 0; i < 40; i++) {
-        const sparkle = document.createElement("div");
-
-        sparkle.innerHTML = "✦";
-        sparkle.className = "sparkle";
-
-        sparkle.style.left = Math.random() * 100 + "vw";
-        sparkle.style.top = Math.random() * 100 + "vh";
-        sparkle.style.fontSize = 10 + Math.random() * 20 + "px";
-        sparkle.style.animationDuration = 1 + Math.random() * 3 + "s";
-
-        document.body.appendChild(sparkle);
-      }
-    </script>
-
-
-    <div class="blur-heart heart1">🩷</div>
-    <div class="blur-heart heart2">🥳</div>
-    <div class="blur-heart heart3">🎀</div>
-    <div class="blur-heart heart4">🎁</div>
-    <div class="blur-heart heart5">🎊</div>
-    <div class="blur-heart heart6">🍰</div>
-
-    <div
-      class="card card-float border border-pink-200/40 rounded-3xl p-8 max-w-lg w-full text-center relative z-10"
-    >
-      <div class="space-y-5">
-        <h1
-          id="line1"
-          class="text-3xl sm:text-4xl font-extrabold text-pink-900 text-shadow leading-tight min-h-[50px] sm:min-h-[60px]"
-        ></h1>
-
-        <p
-          id="line2"
-          class="text-pink-800 text-lg sm:text-xl font-bold soft-pulse text-shadow min-h-[30px] sm:min-h-[35px]"
-        ></p>
-
-        <h2
-          id="line3"
-          class="text-lg sm:text-xl text-pink-900 font-semibold text-shadow min-h-[30px] sm:min-h-[35px]"
-        ></h2>
-
-        <p
-          id="line4"
-          class="text-pink-900 text-sm sm:text-base leading-relaxed text-shadow min-h-[130px] sm:min-h-[110px]"
-        ></p>
-
-        <div id="line5" class="text-4xl sm:text-5xl soft-pulse min-h-[50px] sm:min-h-[60px]"></div>
-
-        <div class="bg-white/30 rounded-2xl p-4">
-          <p
-            id="line6"
-            class="text-pink-800 text-sm sm:text-base font-medium text-shadow min-h-[30px] transition-opacity duration-300"
-          ></p>
-        </div>
+    <div id="landing">
+      <div class="present-wrap" id="presentBtn" onclick="openCard(event)">
+        <svg class="present-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="90" width="120" height="65" rx="6" fill="#f9a8d4"/>
+          <rect x="20" y="90" width="120" height="65" rx="6" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+          <rect x="72" y="90" width="16" height="65" fill="#ec4899" opacity="0.6"/>
+          <g class="lid">
+            <rect x="14" y="70" width="132" height="28" rx="5" fill="#f472b6"/>
+            <rect x="14" y="70" width="132" height="28" rx="5" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+            <rect x="72" y="70" width="16" height="28" fill="#ec4899" opacity="0.6"/>
+          </g>
+          <ellipse cx="65" cy="66" rx="20" ry="13" transform="rotate(-30 65 66)" fill="#f9a8d4" stroke="#ec4899" stroke-width="1.5"/>
+          <ellipse cx="95" cy="66" rx="20" ry="13" transform="rotate(30 95 66)"  fill="#f9a8d4" stroke="#ec4899" stroke-width="1.5"/>
+          <circle cx="80" cy="70" r="9" fill="#ec4899"/>
+          <circle cx="80" cy="70" r="5" fill="#f9a8d4"/>
+          <text x="30"  y="125" font-size="12" opacity="0.7">✦</text>
+          <text x="125" y="115" font-size="10" opacity="0.5">✦</text>
+          <text x="40"  y="145" font-size="8"  opacity="0.4">✦</text>
+        </svg>
       </div>
+      <p style="color:#831843; font-weight:700; font-size:16px; animation: softPulse 2s infinite;">tap me ✨</p>
+    </div>
 
+    <div id="cardPage" class="flex flex-col items-center justify-center px-4">
 
-      <button
-        onclick="celebrate()"
-        class="cute-btn mt-6 px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 active:scale-95 transition-all duration-300 text-white rounded-2xl text-lg font-bold"
-      >
-        Click for Surprise?!
-      </button>
+      <div id="countdownBanner" class="countdown-banner"></div>
 
+      <div class="blur-heart heart1">🩷</div>
+      <div class="blur-heart heart2">🥳</div>
+      <div class="blur-heart heart3">🎀</div>
+      <div class="blur-heart heart4">🎁</div>
+      <div class="blur-heart heart5">🎊</div>
+      <div class="blur-heart heart6">🍰</div>
 
-      <div
-        id="surprise"
-        class="hidden mt-6 text-xl sm:text-2xl text-pink-900 text-shadow font-bold animate-bounce"
-      ></div>
+      <div class="card card-float border border-pink-200/40 rounded-3xl p-8 max-w-lg w-full text-center relative z-10">
+        <div class="space-y-5">
+          <h1 id="line1" class="text-3xl sm:text-4xl font-extrabold text-pink-900 text-shadow leading-tight min-h-[50px] sm:min-h-[60px]"></h1>
+          <p  id="line2" class="text-pink-800 text-lg sm:text-xl font-bold soft-pulse text-shadow min-h-[30px] sm:min-h-[35px]"></p>
+          <h2 id="line3" class="text-lg sm:text-xl text-pink-900 font-semibold text-shadow min-h-[30px] sm:min-h-[35px]"></h2>
+          <p  id="line4" class="text-pink-900 text-sm sm:text-base leading-relaxed text-shadow min-h-[130px] sm:min-h-[110px]"></p>
+          <div id="line5" class="text-4xl sm:text-5xl soft-pulse min-h-[50px] sm:min-h-[60px]"></div>
+          <div class="bg-white/30 rounded-2xl p-4">
+            <p id="line6" class="text-pink-800 text-sm sm:text-base font-medium text-shadow min-h-[30px] transition-opacity duration-300"></p>
+          </div>
+        </div>
 
+        <button onclick="celebrate()" class="cute-btn mt-6 px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 active:scale-95 transition-all duration-300 text-white rounded-2xl text-lg font-bold">
+          Click for Surprise?!
+        </button>
+
+      </div>
+    </div>
 
     <audio id="music" loop>
       <source src="lol.mp3" type="audio/mpeg" />
@@ -389,192 +333,152 @@
 
     <script>
 
+      function openCard(e) {
+        const btn  = document.getElementById('presentBtn');
+        const rect = btn.getBoundingClientRect();
+        const cx   = rect.left + rect.width  / 2;
+        const cy   = rect.top  + rect.height / 2;
+
+        const emojis = ['🎉','✨','🎊','💖','🎈'];
+        for (let i = 0; i < 12; i++) {
+          const s = document.createElement('div');
+          s.className = 'sparkle-burst';
+          s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+          s.style.left = cx + 'px';
+          s.style.top  = cy + 'px';
+          s.style.setProperty('--tx', (Math.random()*200 - 100) + 'px');
+          s.style.setProperty('--ty', (Math.random()*200 - 100) + 'px');
+          s.style.animationDelay = (Math.random()*0.2) + 's';
+          document.body.appendChild(s);
+          setTimeout(() => s.remove(), 900);
+        }
+
+        setTimeout(() => {
+          document.getElementById('landing').classList.add('hide');
+          const card = document.getElementById('cardPage');
+          card.classList.add('show');
+          startTyping();
+          startQuoteCycle();
+          updateCountdown();
+          spawnBackground();
+        }, 400);
+      }
+
+      function spawnBackground() {
+        for (let i = 0; i < 25; i++) {
+          const el = document.createElement("div");
+          el.innerHTML = ["🎈","✨","🎂","🎉"][Math.floor(Math.random()*4)];
+          el.className = "floating text-2xl";
+          el.style.left = Math.random()*100 + "vw";
+          el.style.animationDuration = 5 + Math.random()*7 + "s";
+          el.style.fontSize = 20 + Math.random()*25 + "px";
+          document.body.appendChild(el);
+        }
+        for (let i = 0; i < 40; i++) {
+          const s = document.createElement("div");
+          s.innerHTML = "✦";
+          s.className = "sparkle";
+          s.style.left = Math.random()*100 + "vw";
+          s.style.top  = Math.random()*100 + "vh";
+          s.style.fontSize = 10 + Math.random()*20 + "px";
+          s.style.animationDuration = 1 + Math.random()*3 + "s";
+          document.body.appendChild(s);
+        }
+      }
 
       const messages = [
-        {
-          id: "line1",
-          text: "Happy Birthday Auntie",
-        },
-        {
-          id: "line2",
-          text: "生日快乐 Sophia ♡",
-        },
-        {
-          id: "line3",
-          text: "For The Most Special Girl",
-        },
-        {
-          id: "line4",
-          text: "I hope this special day is filled with the sweet love and happiness you deserve and that you make tons of memories that make you smile! You deserve everything truly and I'm looking forward to seeing you grow - forever your loser bum jy",
-        },
-        {
-          id: "line5",
-          text: "𐙚❶ ❾𐙚",
-        },
+        { id: "line1", text: "Happy Birthday Auntie" },
+        { id: "line2", text: "生日快乐 Sophia ♡" },
+        { id: "line3", text: "For The Most Special Girl" },
+        { id: "line4", text: "I hope this special day is filled with the sweet love and happiness you deserve and that you make tons of memories that make you smile! You deserve everything truly and I'm looking forward to seeing you grow - forever your loser bum jy" },
+        { id: "line5", text: "𐙚❶ ❾𐙚" },
       ];
 
-      async function typeLine(elementId, text, speed = 28) {
-        const element = document.getElementById(elementId);
-
+      async function typeLine(elementId, text, speed = 16) {
+        const el = document.getElementById(elementId);
         for (let i = 0; i < text.length; i++) {
-          element.innerHTML += text.charAt(i);
-
-          await new Promise((resolve) => setTimeout(resolve, speed));
+          el.innerHTML += text.charAt(i);
+          await new Promise(r => setTimeout(r, speed));
         }
       }
 
       async function startTyping() {
         for (const msg of messages) {
           await typeLine(msg.id, msg.text);
-
-          await new Promise((resolve) => setTimeout(resolve, 400));
+          await new Promise(r => setTimeout(r, 400));
         }
       }
-
-      startTyping();
 
       const quotes = [
         "Enjoy this day and celebrate it with your loved ones",
         "Smile and be happy today!",
         "So lucky to have you in my life",
-        "Best day goes to the best ykwim",
         "You deserve all the happiness in the world",
-        "Wishing you a day as amazing as you are",
+        "Wishing today the best day ever",
         "Hope this year brings you everything youve been wishing for",
+        "JY wishing you the best forever n ever!",
       ];
 
       let quoteIndex = 0;
 
       async function startQuoteCycle() {
         const el = document.getElementById("line6");
-
-        await new Promise((resolve) => setTimeout(resolve, 9000));
-
+        await new Promise(r => setTimeout(r, 9000));
         while (true) {
           el.style.opacity = 0;
-          await new Promise((resolve) => setTimeout(resolve, 400));
-
+          await new Promise(r => setTimeout(r, 400));
           el.textContent = quotes[quoteIndex];
           el.style.opacity = 1;
-
           quoteIndex = (quoteIndex + 1) % quotes.length;
-
-          await new Promise((resolve) => setTimeout(resolve, 4500));
+          await new Promise(r => setTimeout(r, 4500));
         }
       }
 
-      startQuoteCycle();
-
-
       function updateCountdown() {
-        const birthday = new Date("2026-07-16T00:00:00");
-        const now = new Date();
-        const banner = document.getElementById("countdownBanner");
-
+        const birthday   = new Date("2026-07-16T00:00:00");
+        const now        = new Date();
+        const banner     = document.getElementById("countdownBanner");
         const startOfBday = new Date(birthday);
-        const endOfBday = new Date(birthday);
+        const endOfBday   = new Date(birthday);
         endOfBday.setDate(endOfBday.getDate() + 1);
 
-        if (now >= startOfBday && now < endOfBday) {
-          banner.textContent = " It's your BDAYYY! YAYYYYYYY!";
-          return;
-        }
+        if (now >= startOfBday && now < endOfBday) { banner.textContent = " It's your BDAYYY! YAYYYYYYY!"; return; }
+        if (now >= endOfBday)                       { banner.textContent = "Hope you had the best birthday!"; return; }
 
-        if (now >= endOfBday) {
-          banner.textContent = "Hope you had the best birthday!";
-          return;
-        }
-
-        const diffMs = startOfBday - now;
-        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
-
+        const diffMs  = startOfBday - now;
+        const days    = Math.floor(diffMs / (1000*60*60*24));
+        const hours   = Math.floor((diffMs / (1000*60*60)) % 24);
+        const minutes = Math.floor((diffMs / (1000*60)) % 60);
         banner.textContent = `✨ ${days}d ${hours}h ${minutes}m until your birthday! ✨`;
       }
 
-      updateCountdown();
       setInterval(updateCountdown, 60000);
 
-
       function celebrate() {
-        const music = document.getElementById("music");
+        document.getElementById("music").play();
+
+
+        confetti({ particleCount: 250, spread: 120, startVelocity: 45, scalar: 1.2, origin: { y: 0.6 } });
 
         setTimeout(() => {
-          music.play();
+          confetti({ particleCount: 120, angle: 60,  spread: 70, origin: { x: 0 } });
+          confetti({ particleCount: 120, angle: 120, spread: 70, origin: { x: 1 } });
         }, 300);
 
-        document.getElementById("surprise").classList.remove("hidden");
-
-        confetti({
-          particleCount: 250,
-          spread: 120,
-          startVelocity: 45,
-          scalar: 1.2,
-          origin: { y: 0.6 },
-        });
-
-        setTimeout(() => {
-          confetti({
-            particleCount: 120,
-            angle: 60,
-            spread: 70,
-            origin: { x: 0 },
-          });
-
-          confetti({
-            particleCount: 120,
-            angle: 120,
-            spread: 70,
-            origin: { x: 1 },
-          });
-        }, 300);
-
-        let duration = 3000;
-        let end = Date.now() + duration;
-
+        const end = Date.now() + 3000;
         (function frame() {
-          confetti({
-            particleCount: 6,
-            spread: 55,
-            origin: {
-              x: Math.random(),
-              y: Math.random() - 0.2,
-            },
-          });
-
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
+          confetti({ particleCount: 6, spread: 55, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+          if (Date.now() < end) requestAnimationFrame(frame);
         })();
       }
 
-
       document.addEventListener("mousemove", (e) => {
         const star = document.createElement("div");
-
         star.innerHTML = "✦";
-
-        star.style.position = "absolute";
-        star.style.left = e.pageX + "px";
-        star.style.top = e.pageY + "px";
-        star.style.color = "white";
-        star.style.fontSize = "12px";
-        star.style.pointerEvents = "none";
-        star.style.opacity = "0.8";
-        star.style.zIndex = "999";
-        star.style.transition = "all 0.8s ease";
-
+        star.style.cssText = `position:absolute;left:${e.pageX}px;top:${e.pageY}px;color:white;font-size:12px;pointer-events:none;opacity:0.8;z-index:999;transition:all 0.8s ease;`;
         document.body.appendChild(star);
-
-        setTimeout(() => {
-          star.style.transform = "translateY(-20px) scale(0)";
-          star.style.opacity = "0";
-        }, 10);
-
-        setTimeout(() => {
-          star.remove();
-        }, 800);
+        setTimeout(() => { star.style.transform = "translateY(-20px) scale(0)"; star.style.opacity = "0"; }, 10);
+        setTimeout(() => star.remove(), 800);
       });
     </script>
   </body>
