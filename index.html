@@ -19,7 +19,7 @@
         overflow: hidden;
         background: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4);
         background-size: 400% 400%;
-        animation: gradientMove 10s ease infinite;
+        animation: gradientMove 10s ease infinite, colorCycle 30s linear infinite;
         font-family: "Quicksand", sans-serif;
       }
 
@@ -32,6 +32,27 @@
         }
         100% {
           background-position: left;
+        }
+      }
+
+      @keyframes colorCycle {
+        0% {
+          background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4);
+        }
+        20% {
+          background-image: linear-gradient(135deg, #ff6b6b, #ffb3b3, #ffd6cc);
+        }
+        40% {
+          background-image: linear-gradient(135deg, #8de3a0, #c9f7d3, #eafff0);
+        }
+        60% {
+          background-image: linear-gradient(135deg, #ffe066, #fff3b0, #fffaf0);
+        }
+        80% {
+          background-image: linear-gradient(135deg, #ffffff, #fef6f9, #ffe9f0);
+        }
+        100% {
+          background-image: linear-gradient(135deg, #ee9194, #fecfef, #fad0c4);
         }
       }
 
@@ -205,7 +226,7 @@
         right: 15%;
         animation-delay: 4s;
       }
-      
+
       .heart4 {
         bottom: 5%;
         right: 3%;
@@ -217,11 +238,12 @@
         animation-delay: 1.5s;
       }
 
-        .heart6 {
-         bottom: 25%;
-         left: 18%;
-         animation-delay: 3s;
-        }
+      .heart6 {
+        bottom: 25%;
+        left: 18%;
+        animation-delay: 3s;
+      }
+
       @keyframes floatHeart {
         0% {
           transform: translateY(0px);
@@ -233,10 +255,41 @@
           transform: translateY(0px);
         }
       }
+
+      @media (max-width: 640px) {
+        .blur-heart {
+          font-size: 60px;
+        }
+        .card {
+          padding: 1.5rem !important;
+        }
+      }
+
+      .countdown-banner {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 12px;
+        padding: 8px 20px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(8px);
+        color: #831843;
+        font-weight: 700;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      @media (min-width: 640px) {
+        .countdown-banner {
+          font-size: 16px;
+        }
+      }
     </style>
   </head>
 
-  <body class="min-h-screen flex items-center justify-center px-4 relative">
+  <body class="min-h-screen flex flex-col items-center justify-center px-4 relative">
+
+    <div id="countdownBanner" class="countdown-banner"></div>
 
     <script>
       for (let i = 0; i < 25; i++) {
@@ -287,30 +340,30 @@
       <div class="space-y-5">
         <h1
           id="line1"
-          class="text-5xl font-extrabold text-pink-900 glow text-shadow leading-tight min-h-[70px]"
+          class="text-3xl sm:text-4xl font-extrabold text-pink-900 text-shadow leading-tight min-h-[50px] sm:min-h-[60px]"
         ></h1>
 
         <p
           id="line2"
-          class="text-pink-800 text-2xl font-bold soft-pulse text-shadow min-h-[40px]"
+          class="text-pink-800 text-lg sm:text-xl font-bold soft-pulse text-shadow min-h-[30px] sm:min-h-[35px]"
         ></p>
 
         <h2
           id="line3"
-          class="text-2xl text-pink-900 font-semibold text-shadow min-h-[40px]"
+          class="text-lg sm:text-xl text-pink-900 font-semibold text-shadow min-h-[30px] sm:min-h-[35px]"
         ></h2>
 
         <p
           id="line4"
-          class="text-pink-900 text-lg leading-relaxed text-shadow min-h-[120px]"
+          class="text-pink-900 text-sm sm:text-base leading-relaxed text-shadow min-h-[130px] sm:min-h-[110px]"
         ></p>
 
-        <div id="line5" class="text-6xl soft-pulse min-h-[70px]"></div>
+        <div id="line5" class="text-4xl sm:text-5xl soft-pulse min-h-[50px] sm:min-h-[60px]"></div>
 
         <div class="bg-white/30 rounded-2xl p-4">
           <p
             id="line6"
-            class="text-pink-800 text-lg font-medium text-shadow min-h-[30px]"
+            class="text-pink-800 text-sm sm:text-base font-medium text-shadow min-h-[30px] transition-opacity duration-300"
           ></p>
         </div>
       </div>
@@ -320,16 +373,14 @@
         onclick="celebrate()"
         class="cute-btn mt-6 px-8 py-4 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 active:scale-95 transition-all duration-300 text-white rounded-2xl text-lg font-bold"
       >
-        Click for Surpise?!
+        Click for Surprise?!
       </button>
 
 
       <div
         id="surprise"
-        class="hidden mt-6 text-2xl text-pink-900 text-shadow font-bold animate-bounce"
-      >
-        You mean alot to me
-      </div>
+        class="hidden mt-6 text-xl sm:text-2xl text-pink-900 text-shadow font-bold animate-bounce"
+      ></div>
 
 
     <audio id="music" loop>
@@ -342,7 +393,7 @@
       const messages = [
         {
           id: "line1",
-          text: "Happy Birthday NERD 🎉",
+          text: "Happy Birthday Auntie",
         },
         {
           id: "line2",
@@ -354,15 +405,11 @@
         },
         {
           id: "line4",
-          text: "I hope this special day is filled with the sweet love and happiness you deserve and make tons of memories that make you smile! You deserve everything truly and I'm looking forward to seeing you grow - forever your loser bum jy",
+          text: "I hope this special day is filled with the sweet love and happiness you deserve and that you make tons of memories that make you smile! You deserve everything truly and I'm looking forward to seeing you grow - forever your loser bum jy",
         },
         {
           id: "line5",
           text: "𐙚❶ ❾𐙚",
-        },
-        {
-          id: "line6",
-          text: "Enjoy this birthday and celebrate it with your loved ones",
         },
       ];
 
@@ -385,6 +432,69 @@
       }
 
       startTyping();
+
+      const quotes = [
+        "Enjoy this day and celebrate it with your loved ones",
+        "Smile and be happy today!",
+        "So lucky to have you in my life",
+        "Best day goes to the best ykwim",
+        "You deserve all the happiness in the world",
+        "Wishing you a day as amazing as you are",
+        "Hope this year brings you everything youve been wishing for",
+      ];
+
+      let quoteIndex = 0;
+
+      async function startQuoteCycle() {
+        const el = document.getElementById("line6");
+
+        await new Promise((resolve) => setTimeout(resolve, 9000));
+
+        while (true) {
+          el.style.opacity = 0;
+          await new Promise((resolve) => setTimeout(resolve, 400));
+
+          el.textContent = quotes[quoteIndex];
+          el.style.opacity = 1;
+
+          quoteIndex = (quoteIndex + 1) % quotes.length;
+
+          await new Promise((resolve) => setTimeout(resolve, 4500));
+        }
+      }
+
+      startQuoteCycle();
+
+
+      function updateCountdown() {
+        const birthday = new Date("2026-07-16T00:00:00");
+        const now = new Date();
+        const banner = document.getElementById("countdownBanner");
+
+        const startOfBday = new Date(birthday);
+        const endOfBday = new Date(birthday);
+        endOfBday.setDate(endOfBday.getDate() + 1);
+
+        if (now >= startOfBday && now < endOfBday) {
+          banner.textContent = " It's your BDAYYY! YAYYYYYYY!";
+          return;
+        }
+
+        if (now >= endOfBday) {
+          banner.textContent = "Hope you had the best birthday!";
+          return;
+        }
+
+        const diffMs = startOfBday - now;
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+
+        banner.textContent = `✨ ${days}d ${hours}h ${minutes}m until your birthday! ✨`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
 
 
       function celebrate() {
