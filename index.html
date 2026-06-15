@@ -294,7 +294,7 @@
           <text x="40"  y="145" font-size="8"  opacity="0.4">✦</text>
         </svg>
       </div>
-      <p style="color:#831843; font-weight:700; font-size:16px; animation: softPulse 2s infinite;">tap me ✨</p>
+      <p style="color:#831843; font-weight:700; font-size:16px; animation: softPulse 2s infinite;">Click Box?</p>
     </div>
 
     <div id="cardPage" class="flex flex-col items-center justify-center px-4">
@@ -449,7 +449,7 @@
         const days    = Math.floor(diffMs / (1000*60*60*24));
         const hours   = Math.floor((diffMs / (1000*60*60)) % 24);
         const minutes = Math.floor((diffMs / (1000*60)) % 60);
-        banner.textContent = `✨ ${days}d ${hours}h ${minutes}m until your birthday! ✨`;
+        banner.textContent = `${days}d ${hours}h ${minutes}m until your birthday!`;
       }
 
       setInterval(updateCountdown, 60000);
